@@ -1,5 +1,6 @@
 const studentModel = require('../models/student.model.server');
 const questionModel = require('../models/question.model.server');
+const answerModel = require('../models/answer.model.server');
 
 createStudent = student =>
     studentModel.create(student);
@@ -33,6 +34,33 @@ updateQuestion = (questionId, question) =>
 deleteQuestion = questionId =>
     questionModel.deleteOne({_id: questionId});
 
+
+//// Answer
+
+
+findAnswersByStudent = studentId =>
+    answerModel.find({"student": studentId}).populate('student').populate('question');
+
+findAnswersByQuestion = questionId =>
+    answerModel.find({"question": questionId}).populate('student').populate('question');
+
+answerQuestion = (studentId, questionId, answer) =>
+    answerModel.create(Object.assign(answer, {"student": studentId, "question": questionId}));
+
+findAllAnswers = () =>
+    answerModel.find().populate('student').populate('question');
+
+findAnswerById = answerId =>
+    answerModel.findById(answerId).populate('student').populate('question');
+
+findAnswersByQuestionAndStudent = (studentId, questionId) =>
+    answerModel.find({"student": studentId, "question": questionId}).populate('student').populate('question');
+
+
+
+/////////////////////////////
+
+
 module.exports = {
     createStudent,
     findAllStudents,
@@ -43,5 +71,12 @@ module.exports = {
     findAllQuestions,
     findQuestionById,
     updateQuestion,
-    deleteQuestion
+    deleteQuestion,
+    answerQuestion,
+    findAllAnswers,
+    findAnswerById,
+    findAnswersByQuestionAndStudent,
+    findAnswersByStudent,
+    findAnswersByQuestion
+
 };

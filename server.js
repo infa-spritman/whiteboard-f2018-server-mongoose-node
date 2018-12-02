@@ -19,4 +19,5 @@ require('./data/db')();
 
 require('./services/student.service.server')(app);
 require('./services/question.service.server')(app);
+require('./services/anwer.service.server')(app);
 app.listen(3000);
