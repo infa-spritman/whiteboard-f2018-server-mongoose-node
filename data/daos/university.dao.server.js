@@ -57,9 +57,10 @@ findAnswersByQuestionAndStudent = (studentId, questionId) =>
     answerModel.find({"student": studentId, "question": questionId}).populate('student').populate('question');
 
 
-
 /////////////////////////////
-
+truncateDatabase = () => {
+    return answerModel.remove().then(() => questionModel.remove()).then(() => studentModel.remove());
+};
 
 module.exports = {
     createStudent,
@@ -77,6 +78,7 @@ module.exports = {
     findAnswerById,
     findAnswersByQuestionAndStudent,
     findAnswersByStudent,
-    findAnswersByQuestion
+    findAnswersByQuestion,
+    truncateDatabase
 
 };
