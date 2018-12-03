@@ -4,7 +4,7 @@ module.exports = function () {
     var connectionString =
         'mongodb://localhost/';
     connectionString += databaseName;
-    const herokuURL = 'mongodb://admin:admin1602@ds157742.mlab.com:57742/whiteboard';
+    const herokuURL = 'mongodb://kodefear:kodefear1602@ds031681.mlab.com:31681/white-board';
     mongoose.connect(herokuURL).then((result) => {
         console.log(result)
     }).catch( err => {
