@@ -17,11 +17,11 @@ require('./data/db')();
 const truncateDatabase = (req, res) =>
     universityDao.truncateDatabase().then(() => res.json("200")).catch(err => res.json(err));
 
-// const populateDatabase = (req, res) =>
-//     universityDao.populateDatabase().then(() => res.json("200")).catch(err => res.json(err));
+const populateDatabase = (req, res) =>
+    universityDao.populateDatabase().then(() => res.json("200")).catch(err => res.json(err));
 
 app.delete('/api/all', truncateDatabase);
-// app.post('/api/populate', populateDatabase);
+app.post('/api/populate', populateDatabase);
 
 require('./services/student.service.server')(app);
 require('./services/question.service.server')(app);
